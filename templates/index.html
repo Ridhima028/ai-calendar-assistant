@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Calendar Assistant — Manage Your Schedule with AI</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <nav class="topnav" aria-label="Primary">
+      <div class="brand">📅 CalendarAI</div>
+      <div class="nav-actions">
+        {% if authenticated %}
+          <a class="btn secondary" href="/logout">Logout</a>
+        {% else %}
+          <a class="btn" href="/login">Login with Google</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" role="main">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner">
+        <h1 id="hero-heading">AI Calendar Assistant</h1>
+        <p class="lead">Manage your Google Calendar with natural language. Create, delete, and query events effortlessly using AI-powered conversations.</p>
+        <div class="hero-cta">
+          {% if not authenticated %}
+            <a class="btn primary" href="/login" id="get-started">Connect Google Calendar</a>
+          {% else %}
+            <button class="btn primary" onclick="document.getElementById('message-input').focus()">Start Chatting</button>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <section class="features" aria-labelledby="features-heading">
+      <h2 id="features-heading">What I Can Do</h2>
+      <div class="feature-list">
+        <div class="feature">📅 Create Events</div>
+        <div class="feature">🗑️ Delete Events</div>
+        <div class="feature">💬 Answer Questions</div>
+        <div class="feature">🤖 Natural Language</div>
+      </div>
+    </section>
+
+    <section class="chat-section" aria-labelledby="chat-heading">
+      <h2 id="chat-heading">💬 Chat with Your Assistant</h2>
+
+      {% if authenticated %}
+      <div class="status-indicator">
+        Connected to Google Calendar
+      </div>
+      {% endif %}
+
+      <div id="chat" class="chat" aria-live="polite" aria-atomic="false">
+        <ul id="messages" class="messages" role="list"></ul>
+      </div>
+
+      <form id="chat-form" class="chat-form" aria-label="Send a message to the assistant">
+        <label for="message-input" class="visually-hidden">Message</label>
+        <textarea id="message-input" name="message" rows="2" placeholder="Try: 'Create a meeting tomorrow at 2pm' or 'Delete my 3pm event today'" aria-required="true"></textarea>
+        <div class="form-actions">
+          <button type="submit" id="send-btn" class="btn primary">
+            <span class="btn-text">Send</span>
+          </button>
+          <button type="button" id="login-btn" class="btn secondary" style="display:none" onclick="window.location='/login'">
+            <span class="btn-text">🔐 Login</span>
+          </button>
+        </div>
+      </form>
+      
+      {% if not authenticated %}
+      <div class="auth-notice">
+        <p>🔒 Please <a href="/login" class="auth-link">connect your Google Calendar</a> to manage events</p>
+      </div>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <small>© 2026 AI Calendar Assistant — Powered by Google Gemini & LangChain</small>
+  </footer>
+
+  <script src="/static/js/chat.js" defer></script>
+</body>
+</html>

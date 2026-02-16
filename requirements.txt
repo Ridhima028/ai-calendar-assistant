@@ -1,0 +1,14 @@
+flask
+python-dotenv
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+requests
+google-generativeai
+langchain==0.2.1
+langchain-community==0.2.1
+langchain-core==0.2.1
+langchain-google-genai
+faiss-cpu
+google-generativeai

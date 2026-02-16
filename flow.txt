@@ -1,0 +1,115 @@
+OAuth ka flow
+/login
+  ⬇️
+Google Consent Screen
+  ⬇️
+/oauth2callback
+  ⬇️
+token.json create
+  ⬇️
+Calendar API usable
+
+token.json:
+Jab user:
+
+Google se login karta hai
+
+Permissions Allow karta hai
+
+Google tumhare app ko bolta hai:
+
+“Okay, is user ne calendar access allow kar diya.”
+
+Is permission ko file me save kiya jata hai → token.json
+
+
+OAuth (DONE ✅)
+   ↓
+token.json (DONE ✅)
+   ↓
+Flask app (DONE ✅)
+   ↓
+Gemini (NEXT ⏭️)
+   ↓
+Calendar conflict check (NEXT ⏭️)
+   ↓
+Create / Update / Delete event
+
+
+
+
+User Message
+   ↓
+Intent Detector
+   ↓
+router.py
+   ↓
+┌───────────────┬────────────────┬──────────────┐
+│ create_event  │ delete_event   │ query        │
+│ ↓             │ ↓              │ ↓            │
+│ calendar_     │ calendar_      │ rag_query    │
+│ create.py     │ delete.py      │              │
+└───────────────┴────────────────┴──────────────┘
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🔁 Future version ideas
+🔹 RAG add karo agar:
+
+User bole:
+“Company policy ke according meeting schedule karo”
+
+Tum PDF / rules store karti ho
+
+🔹 LangChain add karo agar:
+
+Multi-step conversation
+
+Memory chahiye
+
+“Are you sure?” type confirmations
+
+Multiple tools (calendar + mail + slack)
+
+
+You are a calendar assistant.
+
+
+
+User message:
+"{USER_MESSAGE}"
+
+Extract event information.
+
+Return ONLY valid JSON in this format:
+{
+  "intent": "create",
+  "title": "",
+  "start": "YYYY-MM-DDTHH:MM",
+  "end": "YYYY-MM-DDTHH:MM",
+  "description": "",
+  "check_conflict": true
+}
+
+If any field is missing, make a reasonable assumption.
+Do not add explanation.
